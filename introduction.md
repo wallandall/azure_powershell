@@ -13,3 +13,5 @@ To check if PowerShell is installed on your system type the following command : 
 The output should be similar to the below image:
 
 ![PowerShell Version](img/psVersionTable.png)
+
+If PowerShell is not installed, you can use this [link](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.2) to install it on your respective system
