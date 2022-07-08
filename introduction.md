@@ -26,6 +26,8 @@ To installe the Azure PowerShell Module run the below steps:
 4. To check all installed modules, run :
    1. ```Get-InstalledModule```
 
+Please ensure you have sufficient permissions to install the Az Module. If you do not you will need to install the module as an Administrator. When installing modules as an administrator you need to change the scope from ***CurentUser*** to ***AllUsers***
+
 Detailed information on Installing Azure PowerShell can be found [here](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps)
 
 # cmdlets (PowerShell Commands)
