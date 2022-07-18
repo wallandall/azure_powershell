@@ -20,4 +20,22 @@ e.g.: Create a storage account
 
 ```
 
+## Creating a container and uploading a BLOB
+````
+    $AccountName = "account_name"
+    $ResourceGroupName = "ResourceGroupName"
+    #1 Create the container
+    $ContainerName = "your_name"
+    $StorageAccount = Get-AzStorageAccount -Name $AccountName -ResourceGroupName $ResourceGroupName
+    New-AzStorageContainer -Name $ContainerName -Context $StorageAccount.Context -Permission Blob
+
+    #2 Upload file
+    $BlobObject =@{
+        FileLocation="File_location
+    }
+    Set-AzStorageBlobContent -Context $StorageAccount.Context -Container $$ContainerName -File 
+````
+
+
+
 [Back](ReadMe.md)
