@@ -31,9 +31,10 @@ e.g.: Create a storage account
 
     #2 Upload file
     $BlobObject =@{
-        FileLocation="File_location
+        FileLocation="File_location"
+        ObjectName="File_Name"
     }
-    Set-AzStorageBlobContent -Context $StorageAccount.Context -Container $$ContainerName -File 
+    Set-AzStorageBlobContent -Context $StorageAccount.Context -Container $$ContainerName -File $BlobObject['FileLocation'] -Blob $BlobObject['ObjectName']
 ````
 
 
