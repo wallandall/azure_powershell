@@ -37,7 +37,7 @@ e.g.: Create a storage account
     Set-AzStorageBlobContent -Context $StorageAccount.Context -Container $$ContainerName -File $BlobObject['FileLocation'] -Blob $BlobObject['ObjectName']
 ````
 ## Checking if a Storage Account exisits.
-The below script checks if a storage account exisit before creating it as well as performs checks before creating a container. The script will additionaly handle errors if the storage account already exists or the container . Lastly the script will upload a blob to the defined container.
+The below script defines a set of variables which should be updated to reflect your tenant settings.It then checks if a storage account exisit before creating it as well as performs checks before creating a container. The script will additionaly handle errors if the storage account already exists or the container . Lastly the script will upload a blob to the defined container.
 
 ```
     $AccountName = "your_account_name"
@@ -105,5 +105,63 @@ The below script checks if a storage account exisit before creating it as well a
 
 ## Creating File Shares
 Azure Files offers fully managed file shares in the cloud that are accessible via the industry standard Server Message Block (SMB) protocol or Network File System (NFS) protocol. Azure Files file shares can be mounted concurrently by cloud or on-premises deployments. SMB Azure file shares are accessible from Windows, Linux, and macOS clients. NFS Azure Files shares are accessible from Linux or macOS clients. Additionally, SMB Azure file shares can be cached on Windows Servers with Azure File Sync for fast access near where the data is being used. [Read More](https://docs.microsoft.com/en-us/azure/storage/files/storage-files-introduction)
+
+The below script  defines a set of variables which should be updated to reflect your tenant settings. It then gets the storage acount and stores it as an object.Based on this object a file and a directory is created. Finaly a file is uploaded to the file Share.
+
+
+```
+# Update the below variables
+
+    $AccountName = "your_account_name"
+    $ResourceGroupName = "resource_group"
+    $FileShareName = "Your_FileShare_Name
+    $DirectoryName = "YourDirectoryName
+    $FilePath = "Your_File_Path"
+    $Source = "Your Source File"
+    $StorageAccount = Get-AzStorageAccount -Name $AccountName -ResourceGroupName $ResourceGroupName
+# Create an object
+
+$FileShareConfig=@{
+    Context=$StorageAccount.Context
+    Name = $FileShareName
+}
+
+# Create the file share
+
+New-AzStorageShare @FileShareConfig
+
+# Create a directory in the file share
+
+$DirectoryDetails=@{
+    Context=$StorageAccount.Context
+    ShareName =  $FileShareName
+    Path= $DirectoryName
+}
+
+
+New-AzStorageDirectory @DirectoryDetails
+
+# upload a file to the file share
+
+$FileDetails=@{
+    Context=$StorageAccount.Context
+    ShareName = $ShareName
+    Source= $Source
+    Path=$FilePath
+}
+
+Set-AzStorageFileContent @FileDetails
+
+```
+
+### Command Reference
+1. [Get-AzStorageAccount](https://docs.microsoft.com/en-us/powershell/module/az.storage/get-azstorageaccount)
+
+2. [New-AzStorageShare](https://docs.microsoft.com/en-us/powershell/module/az.storage/new-azstorageshare)
+
+3. [New-AzStorageDirectory](https://docs.microsoft.com/en-us/powershell/module/az.storage/new-azstoragedirectory)
+
+4. [Set-AzStorageFileContent](https://docs.microsoft.com/en-us/powershell/module/az.storage/set-azstoragefilecontent)
+
 
 [Back](ReadMe.md)
